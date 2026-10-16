@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+//-----------------------------//Importing Function//-----------------------------//
+import Header from './components/includes/Header';
+import Footer from './components/includes/Footer';
+import Home from './components/Home';
+import AdvancedJS from './components/AdvancedJS';//import AdvancedJS Component
+import { BrowserRouter as BrowserRouter, Routes, Route } from 'react-router-dom'; 
+import FAQ from './components/FAQ';//import FAQ Component
+import Bookings from './components/Bookings';//import Bookings Component
 
+//-----------------------------//function components//-----------------------------//
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* */}
+
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/advancedJS" element={<AdvancedJS />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/Bookings" element={<Bookings />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+
+    </>
   );
 }
 

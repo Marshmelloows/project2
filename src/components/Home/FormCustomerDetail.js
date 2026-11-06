@@ -16,17 +16,19 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
             setType({customer: "", business: "checked"});
         }
     }
-    //---------------------------------------------//
+//---------------------------------------------//
     //Customer details
-    const [customerDetails, setCustomerDetails] = useState({title: "Mr", firstName: "", lastName: "",});
+    const [customerDetails, setCustomerDetails] = useState({title: "Mr", firstname: "", lastname: "",});
     
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setCustomerDetails((prevDetails) => ({
-            ...prevDetails,
-            [name]: value,
-        }));
+        setCustomerDetails( {...customerDetails, ...{[name]: value} });
     }
+    useEffect(() => {
+        //Call back function to send customer details to parent component
+        sendCustomerDetails(customerDetails);
+    }, [customerDetails]);
+// for
     //Component UI: html rendering
     return(<>
         <h2>Customer Details</h2>
@@ -36,11 +38,13 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
                 <legend className="col-11 float-none w-auto">Customer type*</legend>
                 <div>
                     <label className="col-12 col-md-12 col-lg-4">Customer</label>
-                    <input type="radio" name="customer-type" value="customer" checked />
+                    <input type="radio" name="customertype" value="customer"
+                        checked={type.customer === "checked"} onChange={updateCustomerType} />
                 </div>
                 <div>
                     <label className="col-12 col-md-12 col-lg-4">Business</label>
-                    <input type="radio" name="customer-type" value="Business" checked />
+                    <input type="radio" name="customertype" value="business"
+                        checked={type.business === "checked"} onChange={updateCustomerType} />
                 </div>
             </fieldset>
         </div>
@@ -50,8 +54,8 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
             <select className="col-12 col-md-12 col-lg-7"
                     defaultValue="Mr"
                     name="title"
-                    onChange={handleChange}>
-                <option value="Mr" selected>Mr</option>
+                    onChange={handleChange} required>
+                <option value="Mr">Mr</option>
                 <option value="Mrs">Mrs</option>
                 <option value="Ms">Ms</option>
                 <option value="Miss">Miss</option>
@@ -62,7 +66,7 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
         <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">First Name *</label>
             <input className="col-12 col-md-12 col-lg-7" type="text"
-                name="firstName"
+                name="firstname"
                 onChange={handleChange}
                 pattern="^[A-Za-z\s--]+$" title="Only letters, spaces, hyphens, and en-dashes are allowed."
                 onInput={(e) => e.target.value = e.target.value.replace(/[^A-Za-z\s--]/g, '')}
@@ -72,7 +76,7 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
         <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">Last Name *</label>
             <input className="col-12 col-md-12 col-lg-7" type="text" 
-                name="lastName"
+                name="lastname"
                 onChange={handleChange}
                 required/>
         </div>
@@ -103,18 +107,18 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
         <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">Post Code: </label>
             <input className="col-12 col-md-12 col-lg-7" type="text" 
-                name="postCode"
+                name="postcode"
                 onChange={handleChange}
                 required/>
         </div>
         {/*Rule allowing for numbers in phone number*/}
         <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">Phone Number *</label>
-            <input className="col-12 col-md-12 col-lg-7" type="number" 
+            <input className="col-12 col-md-12 col-lg-7" type="text" 
                 name="phone"
                 onChange={handleChange}
-                pattern="^[0-9\s()-+]+$" title="Only numbers, spaces, parentheses, hyphens, and plus signs are allowed."
-                onInput={(e) => e.target.value = e.target.value.replace(/[^0-9\s()-+]/g,"")}
+                pattern="^[0-9\s\(\)\+\-]+$" title="Only numbers, spaces, parentheses, hyphens, and plus signs are allowed."
+                onInput={(e) => e.target.value = e.target.value.replace(/[^0-9\s()+\-]/g,"")}
             required/>
         </div>
         <div className="row mt-1">

@@ -63,13 +63,16 @@ function Header() {
                 </div>
 
                 <div className="col-12 col-md-12 col-lg-4">
-                    <div class="row">
-                    {/*-----------------------------Button 1-----------------------------*/}
-                    <Link to="/" class="col-12 col-md-6 col-lg-6 p-0 m-0 border border-dark text-center
+                    <div className="row">
+                    {/*-----------------------------Home button-----------------------------*/}
+                    <Link to="/" className="col-12 col-md-6 col-lg-6 p-0 m-0 border border-dark text-center
                     text-white" style={buttonStyle1}>HOME</Link>
-                    {/*-----------------------------Button 2-----------------------------*/}
-                    <Link to="/advancedJS" class="col-12 col-md-6 col-lg-6 p-0 m-0 border border-dark
+                    {/*-----------------------------EXTENSION button-----------------------------*/}
+                    <Link to="/advancedJS" className="col-12 col-md-6 col-lg-6 p-0 m-0 border border-dark
                     text-center text-white" style={buttonStyle2}>EXTENSION</Link>
+                    {/*-----------------------------bookings button-----------------------------*/}
+                    <Link to="/Bookings" className="col-12 col-md-6 col-lg-6 p-0 m-0 border border-dark 
+                    text-center text-white" style={buttonStyle2}>Bookings</Link>
                     </div>
                 </div>
             </header>

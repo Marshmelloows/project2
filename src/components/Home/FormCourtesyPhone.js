@@ -27,13 +27,13 @@ function FormCourtesyPhone({ passDataToParent, sendCourtesyDetails }) {
     
     //Handle the "on change"
     let addPhone = (selectedOption) => {
-        selectedOption == 'none' ? setPhoneBorrow(0) : setPhoneBorrow(Number(selectedOption));
+        selectedOption === 'none' ? setPhoneBorrow(0) : setPhoneBorrow(Number(selectedOption));
         //Update totalBond
         let updateId = 0;
-        selectedOption == 'none' ? (updateId = 0) : (updateId = Number(selectedOption))
-        let updateBond = courtesyList.filter(item => {return item.id == updateId})[0].bond
+        selectedOption === 'none' ? (updateId = 0) : (updateId = Number(selectedOption))
+        let updateBond = courtesyList.filter(item => {return item.id === updateId})[0].bond
             
-        + courtesyList.filter(item => {return item.id == ChargerBorrow})[0].bond;
+        + courtesyList.filter(item => {return item.id === ChargerBorrow})[0].bond;
         //Send data upto Parent by calling callback function "passDataToParent"
         passDataToParent(updateBond);//Child1 (FormCourtesyPhone)
         //Also send the chosen phone and charger so Home can save them
@@ -48,12 +48,12 @@ function FormCourtesyPhone({ passDataToParent, sendCourtesyDetails }) {
         }
     }
     let addCharger = (selectedOption) => {
-        selectedOption == 'none' ? setChargerBorrow(0) : setChargerBorrow(Number(selectedOption));
+        selectedOption === 'none' ? setChargerBorrow(0) : setChargerBorrow(Number(selectedOption));
         //Update totalBond
         let updateId = 0;
-        selectedOption == 'none' ? (updateId = 0) : (updateId = Number(selectedOption))
-        let updateBond = courtesyList.filter(item => {return item.id == phoneBorrow})[0].bond
-            + courtesyList.filter(item => {return item.id == updateId})[0].bond;
+        selectedOption === 'none' ? (updateId = 0) : (updateId = Number(selectedOption))
+        let updateBond = courtesyList.filter(item => {return item.id === phoneBorrow})[0].bond
+            + courtesyList.filter(item => {return item.id === updateId})[0].bond;
         //Send data upto Parent by calling callback function "passDataToParent"
         passDataToParent(updateBond);//Child1 (FormCourtesyPhone)
         //Also send the chosen phone and charger so Home can save them
@@ -111,19 +111,19 @@ function FormCourtesyPhone({ passDataToParent, sendCourtesyDetails }) {
                 {/*Display all items in state in the table*/}
                 {/*Phone borrow table*/}
                 
-                {phoneBorrow == 0? (null) : (
+                {phoneBorrow === 0? (null) : (
                     <tr>
-                        <td>{courtesyList.filter(item => {return item.id == phoneBorrow})[0].name}</td>
-                        <td>{courtesyList.filter(item => {return item.id == phoneBorrow})[0].bond}</td>
+                        <td>{courtesyList.filter(item => {return item.id === phoneBorrow})[0].name}</td>
+                        <td>{courtesyList.filter(item => {return item.id === phoneBorrow})[0].bond}</td>
                     </tr>
                 )
                 }
                 {/*Charger borrow*/}
 
-                {ChargerBorrow == 0? (null) : (
+                {ChargerBorrow === 0? (null) : (
                     <tr>
-                        <td>{courtesyList.filter(item => {return item.id == ChargerBorrow})[0].name}</td>
-                        <td>{courtesyList.filter(item => {return item.id == ChargerBorrow})[0].bond}</td>
+                        <td>{courtesyList.filter(item => {return item.id === ChargerBorrow})[0].name}</td>
+                        <td>{courtesyList.filter(item => {return item.id === ChargerBorrow})[0].bond}</td>
                     </tr>
                 )
                 }
